@@ -47,11 +47,6 @@ opt_parser = OptionParser.new do |opt|
 		options[:auth_password] = value
 	end
 
-	# DEPRECATED!
-	opt.on("--auth-ssh-base64 [SSH-BASE64]", "Base64 representation of the ssh private key to be used") do |value|
-		options[:auth_ssh_key_base64] = value
-	end
-
 	opt.on("--formatted-output-file [FILE-PATH]", "If given a formatted (markdown) output will be generated") do |value|
 		options[:formatted_output_file_path] = value
 	end
@@ -124,10 +119,6 @@ used_auth_type=nil
 if options[:auth_ssh_key_raw] and options[:auth_ssh_key_raw].length > 0
 	used_auth_type='ssh'
 	options[:private_key_file_path] = write_private_key_to_file(options[:user_home], options[:auth_ssh_key_raw])
-elsif options[:auth_ssh_key_base64] and options[:auth_ssh_key_base64].length > 0
-	used_auth_type='ssh'
-	private_key_decoded = Base64.strict_decode64(options[:auth_ssh_key_base64])
-	options[:private_key_file_path] = write_private_key_to_file(options[:user_home], private_key_decoded)
 elsif options[:auth_username] and options[:auth_username].length > 0 and options[:auth_password] and options[:auth_password].length > 0
 	used_auth_type='login'
 	repo_uri = URI.parse(prepared_repository_url)
@@ -165,7 +156,7 @@ end
 $options = options
 $prepared_repository_url = prepared_repository_url
 $git_checkout_parameter = git_checkout_parameter
-$this_script_path = File.expand_path('.')
+$this_script_path = File.expand_path(File.dirname(__FILE__))
 
 class String
 	def prepend_lines_with(prepend_with_string)
