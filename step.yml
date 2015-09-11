@@ -52,6 +52,7 @@ inputs:
     opts:
       title: "Clone destination (local) directory path"
       is_expand: true
+      is_required: true
   - auth_user:
     opts:
       title: "Auth: Username"
