@@ -73,7 +73,22 @@ if options[:formatted_output_file_path] and options[:formatted_output_file_path]
 	options[:formatted_output_file_path] = nil
 end
 
-puts "Provided options: #{options}"
+#
+# Print configs
+puts
+puts '========== Configs =========='
+puts " * repo_url: #{options[:repo_url]}" if !options[:repo_url].nil? && options[:repo_url] != ''
+puts " * branch: #{options[:branch]}" if !options[:branch].nil? && options[:branch] != ''
+puts " * tag: #{options[:tag]}" if !options[:tag].nil? && options[:tag] != ''
+puts " * commit_hash: #{options[:commit_hash]}" if !options[:commit_hash].nil? && options[:commit_hash] != ''
+puts " * pull_request_id: #{options[:pull_request_id]}" if !options[:pull_request_id].nil? && options[:pull_request_id] != ''
+puts " * clone_destination_dir: #{options[:clone_destination_dir]}" if !options[:clone_destination_dir].nil? && options[:clone_destination_dir] != ''
+puts " * auth_username: #{options[:auth_username]}" if !options[:auth_username].nil? && options[:auth_username] != ''
+puts ' * auth_password: *****' if !options[:auth_password].nil? && options[:auth_password] != ''
+puts " * formatted_output_file_path: #{options[:formatted_output_file_path]}" if !options[:formatted_output_file_path].nil? && options[:formatted_output_file_path] != ''
+puts " * is_export_outputs: #{options[:is_export_outputs]}" if !options[:is_export_outputs].nil? && options[:is_export_outputs] != ''
+puts ' * auth_ssh_key_raw: *****' if !options[:auth_ssh_key_raw].nil? && options[:auth_ssh_key_raw] != ''
+puts
 
 unless options[:repo_url] and options[:repo_url].length > 0
 	puts opt_parser
