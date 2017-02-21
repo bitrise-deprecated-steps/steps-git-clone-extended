@@ -3,6 +3,12 @@ require 'fileutils'
 require 'uri'
 require 'optparse'
 
+def log_error(message)
+  puts "\e[31m#{message}\e[0m"
+end
+
+log_error('This step is deprecated, use activate-ssh-key + git-clone steps instead. Will be removed by: 2017-08-01')
+
 options = {
 	user_home: ENV['HOME'],
 	private_key_file_path: nil,
